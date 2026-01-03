@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-97K1M4784K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-97K1M4784K');
+</script>
+
+<title>The Bridge</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+	--accent-1:#ff5a7d;
+	--accent-2:#ff8aa6;
+	--muted:#9aa0a6;
+	--card:#0f1315;
+	--radius:14px;
+	--gap:16px;
+	--shadow:0 8px 22px rgba(2,6,23,0.6);
+	--btn-hover: brightness(1.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif;}
+body{background:#0e1012;color:#fff;line-height:1.4;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1200px;margin:0 auto;padding:20px;}
+header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:700;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));font-family:Poppins,sans-serif;}
+h1{font-size:22px;}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+.search{flex:1;min-width:180px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:inherit;font-size:14px;}
+
+.grid{display:grid;grid-template-columns:1fr;gap:var(--gap);}
+@media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr);}}
+
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px;box-shadow:var(--shadow);transition:transform .22s ease,box-shadow .22s;}
+.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 36px rgba(2,6,23,0.6);}
+.media{width:100%;padding-top:100%;position:relative;overflow:hidden;border-radius:12px;margin-bottom:12px;}
+.media img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+.title{font-weight:600;font-size:16px;margin-bottom:6px;}
+.price{font-weight:700;font-size:14px;color:#ffd166;margin-bottom:10px;}
+.btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:none;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none;display:inline-block;transition:transform .16s ease, filter .16s ease;}
+.btn:hover{filter: var(--btn-hover);}
+.muted{color:var(--muted);font-size:13px;margin-top:12px;text-align:center;}
+
+/* focus + keyboard */
+.card:focus{outline:3px solid rgba(255,90,125,0.14);transform:translateY(-6px) scale(1.01)}
+.card{transition:transform .22s ease,box-shadow .22s,outline .08s ease}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<header>
+				<div class="logo" aria-hidden="true">
+					<!-- simple bridge icon -->
+					<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<rect width="24" height="24" rx="4" fill="url(#g)" />
+						<defs>
+							<linearGradient id="g" x1="0" x2="1">
+								<stop offset="0" stop-color="#ff5a7d"/>
+								<stop offset="1" stop-color="#ff8aa6"/>
+							</linearGradient>
+						</defs>
+						<path d="M3 16c0-2 3-4 9-4s9 2 9 4" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
+						<path d="M6 16V11m12 5V11" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
+						<path d="M3 11h18" stroke="#fff" stroke-opacity="0.6" stroke-width="1" stroke-linecap="round"/>
+					</svg>
+				</div>
+				<h1>The Bridge</h1>
+	</header>
+
+	<div class="controls">
+		<input id="search" class="search" type="search" placeholder="Search products..." aria-label="Search products">
+	</div>
+
+	<main>
+		<section id="products" class="grid"></section>
+	</main>
+
+	<footer class="muted">
+		Affiliate Disclosure: I may earn a commission if you purchase through links on this page.
+	</footer>
+</div>
+
+<script>
+(function(){
+	const productsEl = document.getElementById('products');
+	const searchEl = document.getElementById('search');
+
+	// PRODUCTS will be populated dynamically.
+	// Preferred: provide a `products.json` next to this file (array of product objects).
+	// Fallback: define `window.PRODUCTS = [...]` in the console or another script before this runs.
+	let PRODUCTS = [];
+
+	function loadProducts(){
+		// Try fetching products.json first
+		return fetch('products.json').then(res=>{
+			if(!res.ok) throw new Error('products.json not found');
+			return res.json();
+		}).then(data=>{
+			if(Array.isArray(data)) { PRODUCTS = data; return; }
+			throw new Error('products.json invalid');
+		}).catch(()=>{
+			// Fallback to window.PRODUCTS if provided, otherwise keep empty
+			if(Array.isArray(window.PRODUCTS)) PRODUCTS = window.PRODUCTS;
+			else PRODUCTS = [];
+		});
+	}
+
+	// Safe external link helper
+	function safeLink(a){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+
+	function formatPrice(v){
+		return typeof v==='number' ? new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'}).format(v) : v;
+	}
+
+	function safeUrl(u){ try{ const url = new URL(u, location.href); return (url.protocol==='http:'||url.protocol==='https:')? url.toString() : '#'; }catch(e){return '#';} }
+
+	function createCard(p){
+		const art = document.createElement('article'); art.className='card';
+		art.tabIndex = 0;
+		const media = document.createElement('div'); media.className='media';
+		const img = document.createElement('img'); img.src = safeUrl(p.img); img.alt = p.title || 'Product image';
+		img.loading = 'lazy'; img.decoding = 'async';
+		media.appendChild(img);
+
+		const title = document.createElement('div'); title.className='title'; title.textContent=p.title||'';
+		const price = document.createElement('div'); price.className='price'; price.textContent=formatPrice(p.price);
+		const btn = document.createElement('a'); btn.className='btn';
+		btn.href = safeUrl(p.link) || '#';
+		btn.textContent='Buy Now';
+		safeLink(btn);
+
+		art.appendChild(media); art.appendChild(title); art.appendChild(price); art.appendChild(btn);
+
+		// keyboard: Enter activates the primary link
+		art.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ const a = art.querySelector('a'); if(a) a.click(); } });
+		return art;
+	}
+
+	function render(){
+		const q = (searchEl.value||'').toLowerCase().trim();
+		productsEl.innerHTML='';
+		const filtered = PRODUCTS.filter(p=>!q || (p.title||'').toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q));
+		if(!filtered.length){
+			const msg = PRODUCTS.length ? '<div class="muted">No products match your search.</div>' : '<div class="muted">No products available.</div>';
+			productsEl.innerHTML = msg; return;
+		}
+		const frag = document.createDocumentFragment();
+		filtered.forEach(p=>frag.appendChild(createCard(p)));
+		productsEl.appendChild(frag);
+	}
+
+	// Load products (from products.json or window.PRODUCTS), then render
+	loadProducts().then(()=>{
+		searchEl.addEventListener('input', render);
+		render();
+	});
+})();
+</script>
+</body>
+</html>
