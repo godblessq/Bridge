@@ -10,7 +10,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-97K1M4784K');
 </script>
 
@@ -18,16 +17,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-	--accent-1:#ff5a7d;
-	--accent-2:#ff8aa6;
-	--muted:#9aa0a6;
-	--card:#0f1315;
-	--radius:14px;
-	--gap:16px;
-	--shadow:0 8px 22px rgba(2,6,23,0.6);
-	--btn-hover: brightness(1.08);
+  --accent-1:#ff5a7d;
+  --accent-2:#ff8aa6;
+  --muted:#9aa0a6;
+  --card:#0f1315;
+  --radius:14px;
+  --gap:16px;
+  --shadow:0 8px 22px rgba(2,6,23,0.6);
+  --btn-hover: brightness(1.08);
 }
-
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif;}
 body{background:#0e1012;color:#fff;line-height:1.4;-webkit-font-smoothing:antialiased;}
 .wrap{max-width:1200px;margin:0 auto;padding:20px;}
@@ -36,158 +34,145 @@ header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 h1{font-size:22px;}
 .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
 .search{flex:1;min-width:180px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:inherit;font-size:14px;}
-
 .grid{display:grid;grid-template-columns:1fr;gap:var(--gap);}
 @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr);}}
 @media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr);}}
-
 .card{background:var(--card);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px;box-shadow:var(--shadow);transition:transform .22s ease,box-shadow .22s;}
 .card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 36px rgba(2,6,23,0.6);}
 .media{width:100%;padding-top:100%;position:relative;overflow:hidden;border-radius:12px;margin-bottom:12px;}
-.media img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+.media img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;object-position:center;}
+.media button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.3);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-weight:700;}
+.media button.left{left:8px;}
+.media button.right{right:8px;}
 .title{font-weight:600;font-size:16px;margin-bottom:6px;}
+.desc{color:var(--muted);font-size:13px;margin-bottom:8px;text-align:center;line-height:1.3}
 .price{font-weight:700;font-size:14px;color:#ffd166;margin-bottom:10px;}
 .btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:none;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none;display:inline-block;transition:transform .16s ease, filter .16s ease;}
 .btn:hover{filter: var(--btn-hover);}
 .muted{color:var(--muted);font-size:13px;margin-top:12px;text-align:center;}
-
-/* focus + keyboard */
 .card:focus{outline:3px solid rgba(255,90,125,0.14);transform:translateY(-6px) scale(1.01)}
 .card{transition:transform .22s ease,box-shadow .22s,outline .08s ease}
 </style>
 </head>
 <body>
 <div class="wrap">
-	<header>
-				<div class="logo" aria-hidden="true">
-					<!-- simple bridge icon -->
-					<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-						<rect width="24" height="24" rx="4" fill="url(#g)" />
-						<defs>
-							<linearGradient id="g" x1="0" x2="1">
-								<stop offset="0" stop-color="#ff5a7d"/>
-								<stop offset="1" stop-color="#ff8aa6"/>
-							</linearGradient>
-						</defs>
-						<path d="M3 16c0-2 3-4 9-4s9 2 9 4" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
-						<path d="M6 16V11m12 5V11" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
-						<path d="M3 11h18" stroke="#fff" stroke-opacity="0.6" stroke-width="1" stroke-linecap="round"/>
-					</svg>
-				</div>
-				<h1>The Bridge</h1>
-	</header>
+  <header>
+    <div class="logo" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="url(#g)" />
+        <defs>
+          <linearGradient id="g" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff5a7d"/>
+            <stop offset="1" stop-color="#ff8aa6"/>
+          </linearGradient>
+        </defs>
+        <path d="M3 16c0-2 3-4 9-4s9 2 9 4" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M6 16V11m12 5V11" stroke="#fff" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M3 11h18" stroke="#fff" stroke-opacity="0.6" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>The Bridge</h1>
+  </header>
 
-	<div class="controls">
-		<input id="search" class="search" type="search" placeholder="Search products..." aria-label="Search products">
-	</div>
+  <div class="controls">
+    <input id="search" class="search" type="search" placeholder="Search products..." aria-label="Search products">
+  </div>
 
-	<main>
-		<section id="products" class="grid"></section>
-	</main>
+  <main>
+    <section id="products" class="grid"></section>
+  </main>
 
-	<footer class="muted">
-		Affiliate Disclosure: I may earn a commission if you purchase through links on this page.
-	</footer>
+  <footer class="muted">
+    Affiliate Disclosure: I may earn a commission if you purchase through links on this page.
+  </footer>
 </div>
 
 <script>
-// Fallback product data (in case products.json is not present)
+// Optional fallback product if products.json fails
 window.PRODUCTS = [
   {
-    "id": "tinted-face-body-lotion-spf-30-medium-beige",
-    "title": "Tinted Face & Body Lotion SPF 30 – Medium Beige",
-    "img": "https://cdn.shopify.com/s/files/1/0550/2347/1009/products/1010379456532_medium_beige.jpg",
-    "price": 19.99,
-    "link": "https://www.naturesbrands.com/products/tinted-face-and-body-lotion-spf-30-medium-beige?rfsn=8949499.8349fad&variant=1010379456532&utm_source=refersion&utm_medium=affiliate&utm_campaign=8949499.8349fad"
+    id: "tinted-face-body-lotion-spf-30-medium-beige",
+    title: "Tinted Face & Body Lotion SPF 30 – Medium Beige",
+    images: ["images/Lotion-Dark-Honey-4floz-PBA-Free-Plastic (1).webp"],
+    alt: "Tinted Face & Body Lotion SPF 30 – Medium Beige",
+    price: 19.99,
+    link: "https://www.naturesbrands.com/products/tinted-face-and-body-lotion-spf-30-medium-beige?rfsn=8949499.8349fad&variant=1010379456532&utm_source=refersion&utm_medium=affiliate&utm_campaign=8949499.8349fad"
   }
 ];
 
-(function(){
-	const productsEl = document.getElementById('products');
-	const searchEl = document.getElementById('search');
+// Replace rendering with async folder-based carousel per user request
+const createCarousel = async productId => {
+  const container = document.createElement('div');
+  container.className = 'media';
+  let current = 0;
 
-	// PRODUCTS will be populated dynamically.
-	// Preferred: provide a `products.json` next to this file (array of product objects).
-	// Fallback: define `window.PRODUCTS = [...]` in the console or another script before this runs.
-	let PRODUCTS = [];
+  // Auto-load all images from folder
+  let images = [];
+  try {
+    const res = await fetch(`images/${productId}/`);
+    if(res.ok) {
+      const text = await res.text();
+      // Parse folder listing (for simple static server, make sure directory listing is enabled)
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(text, 'text/html');
+      htmlDoc.querySelectorAll('a').forEach(a=>{
+        const href = a.getAttribute('href');
+        if(href.match(/\.(png|jpg|jpeg|webp|gif)$/i)) images.push(`images/${productId}/${href}`);
+      });
+    }
+  } catch(e){ console.warn('No images folder or fetch blocked', e); }
 
-	function loadProducts(){
-		// Try fetching products.json first
-		return fetch('products.json').then(res=>{
-			if(!res.ok) throw new Error('products.json not found');
-			return res.json();
-		}).then(data=>{
-			if(Array.isArray(data)) { PRODUCTS = data; return; }
-			throw new Error('products.json invalid');
-		}).catch(()=>{
-			// Fallback to window.PRODUCTS if provided, otherwise keep empty
-			if(Array.isArray(window.PRODUCTS)) PRODUCTS = window.PRODUCTS;
-			else PRODUCTS = [];
-		});
-	}
+  // Fallback image
+  if(!images.length) images = ['https://via.placeholder.com/400'];
 
-	// Safe external link helper
-	function safeLink(a){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+  const imgEl = document.createElement('img');
+  imgEl.src = images[current];
+  imgEl.alt = 'Product image';
+  imgEl.loading = 'lazy';
+  imgEl.decoding = 'async';
+  container.appendChild(imgEl);
 
-	function formatPrice(v){
-		return typeof v==='number' ? new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'}).format(v) : v;
-	}
+  if(images.length > 1){
+    const left = document.createElement('button'); left.className='left'; left.textContent='<';
+    const right = document.createElement('button'); right.className='right'; right.textContent='>';
+    left.setAttribute('aria-label','Previous image');
+    right.setAttribute('aria-label','Next image');
+    container.style.position='relative';
+    container.append(left,right);
 
-	function safeUrl(u){ try{ const url = new URL(u, location.href); return (url.protocol==='http:'||url.protocol==='https:')? url.toString() : '#'; }catch(e){return '#';} }
+    left.addEventListener('click', ()=>{ current=(current-1+images.length)%images.length; imgEl.src=images[current]; });
+    right.addEventListener('click', ()=>{ current=(current+1)%images.length; imgEl.src=images[current]; });
+  }
 
-	function createCard(p){
-		const art = document.createElement('article'); art.className='card';
-		art.tabIndex = 0;
-		const media = document.createElement('div'); media.className='media';
-		const img = document.createElement('img'); img.src = safeUrl(p.img); img.alt = p.title || 'Product image';
-		img.loading = 'lazy'; img.decoding = 'async';
-		media.appendChild(img);
+  return container;
+};
 
-		const title = document.createElement('div'); title.className='title'; title.textContent=p.title||'';
-		const price = document.createElement('div'); price.className='price'; price.textContent=formatPrice(p.price);
-		const btn = document.createElement('a'); btn.className='btn';
-		btn.href = safeUrl(p.link) || '#';
-		btn.textContent='Buy Now';
-		safeLink(btn);
-		// GA4 click tracking for affiliate buttons
-		btn.addEventListener('click', ()=>{
-			if(typeof gtag === 'function'){
-				try{
-					gtag('event','click', {
-						'event_category': 'Affiliate',
-						'event_label': p.title,
-						'value': p.price
-					});
-				}catch(e){ /* noop */ }
-			}
-		});
+const createCard = async p => {
+  const art = document.createElement('article'); art.className='card'; art.tabIndex=0;
+  const media = await createCarousel(p.id);
+  const title = document.createElement('div'); title.className='title'; title.textContent=p.title||'';
+  const desc = document.createElement('div'); desc.className='desc'; desc.textContent=p.desc||'';
+  const price = document.createElement('div'); price.className='price'; price.textContent=typeof p.price==='number'? `$${p.price}` : '';
+  const btn = document.createElement('a'); btn.className='btn'; btn.href=p.link||'#'; btn.textContent='Buy Now';
+  btn.target='_blank'; btn.rel='noopener noreferrer';
 
-		art.appendChild(media); art.appendChild(title); art.appendChild(price); art.appendChild(btn);
+  art.append(media,title,desc,price,btn);
+  return art;
+};
 
-		// keyboard: Enter activates the primary link
-		art.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ const a = art.querySelector('a'); if(a) a.click(); } });
-		return art;
-	}
+const renderProducts = async products => {
+  const productsEl = document.getElementById('products');
+  productsEl.innerHTML='';
+  for(const p of products){
+    const card = await createCard(p);
+    productsEl.appendChild(card);
+  }
+};
 
-	function render(){
-		const q = (searchEl.value||'').toLowerCase().trim();
-		productsEl.innerHTML='';
-		const filtered = PRODUCTS.filter(p=>!q || (p.title||'').toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q));
-		if(!filtered.length){
-			const msg = PRODUCTS.length ? '<div class="muted">No products match your search.</div>' : '<div class="muted">No products available.</div>';
-			productsEl.innerHTML = msg; return;
-		}
-		const frag = document.createDocumentFragment();
-		filtered.forEach(p=>frag.appendChild(createCard(p)));
-		productsEl.appendChild(frag);
-	}
-
-	// Load products (from products.json or window.PRODUCTS), then render
-	loadProducts().then(()=>{
-		searchEl.addEventListener('input', render);
-		render();
-	});
-})();
+fetch('products.json')
+  .then(res=>res.json())
+  .then(products=>renderProducts(products))
+  .catch(e=>console.warn('Failed to load products', e));
 </script>
 </body>
 </html>
