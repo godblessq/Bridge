@@ -149,6 +149,18 @@ window.PRODUCTS = [
 		btn.href = safeUrl(p.link) || '#';
 		btn.textContent='Buy Now';
 		safeLink(btn);
+		// GA4 click tracking for affiliate buttons
+		btn.addEventListener('click', ()=>{
+			if(typeof gtag === 'function'){
+				try{
+					gtag('event','click', {
+						'event_category': 'Affiliate',
+						'event_label': p.title,
+						'value': p.price
+					});
+				}catch(e){ /* noop */ }
+			}
+		});
 
 		art.appendChild(media); art.appendChild(title); art.appendChild(price); art.appendChild(btn);
 
