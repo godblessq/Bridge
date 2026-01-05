@@ -100,56 +100,39 @@ window.PRODUCTS = [
   }
 ];
 
-// Replace rendering with async folder-based carousel per user request
-const createCarousel = async productId => {
+// Use images listed in products.json (works on GitHub Pages)
+const createCarousel = p => {
   const container = document.createElement('div');
   container.className = 'media';
+
+  const images = p.images && p.images.length ? p.images : ['https://via.placeholder.com/400'];
   let current = 0;
-
-  // Auto-load all images from folder
-  let images = [];
-  try {
-    const res = await fetch(`images/${productId}/`);
-    if(res.ok) {
-      const text = await res.text();
-      // Parse folder listing (for simple static server, make sure directory listing is enabled)
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(text, 'text/html');
-      htmlDoc.querySelectorAll('a').forEach(a=>{
-        const href = a.getAttribute('href');
-        if(href.match(/\.(png|jpg|jpeg|webp|gif)$/i)) images.push(`images/${productId}/${href}`);
-      });
-    }
-  } catch(e){ console.warn('No images folder or fetch blocked', e); }
-
-  // Fallback image
-  if(!images.length) images = ['https://via.placeholder.com/400'];
 
   const imgEl = document.createElement('img');
   imgEl.src = images[current];
-  imgEl.alt = 'Product image';
+  imgEl.alt = p.alt || p.title || 'Product image';
   imgEl.loading = 'lazy';
   imgEl.decoding = 'async';
   container.appendChild(imgEl);
 
-  if(images.length > 1){
-    const left = document.createElement('button'); left.className='left'; left.textContent='<';
-    const right = document.createElement('button'); right.className='right'; right.textContent='>';
+  if (images.length > 1) {
+    const left = document.createElement('button'); left.className = 'left'; left.type='button'; left.textContent = '<';
+    const right = document.createElement('button'); right.className = 'right'; right.type='button'; right.textContent = '>';
     left.setAttribute('aria-label','Previous image');
     right.setAttribute('aria-label','Next image');
     container.style.position='relative';
-    container.append(left,right);
+    container.append(left, right);
 
-    left.addEventListener('click', ()=>{ current=(current-1+images.length)%images.length; imgEl.src=images[current]; });
-    right.addEventListener('click', ()=>{ current=(current+1)%images.length; imgEl.src=images[current]; });
+    left.addEventListener('click', () => { current = (current - 1 + images.length) % images.length; imgEl.src = images[current]; });
+    right.addEventListener('click', () => { current = (current + 1) % images.length; imgEl.src = images[current]; });
   }
 
   return container;
 };
 
-const createCard = async p => {
+const createCard = p => {
   const art = document.createElement('article'); art.className='card'; art.tabIndex=0;
-  const media = await createCarousel(p.id);
+  const media = createCarousel(p);
   const title = document.createElement('div'); title.className='title'; title.textContent=p.title||'';
   const desc = document.createElement('div'); desc.className='desc'; desc.textContent=p.desc||'';
   const price = document.createElement('div'); price.className='price'; price.textContent=typeof p.price==='number'? `$${p.price}` : '';
@@ -160,13 +143,12 @@ const createCard = async p => {
   return art;
 };
 
-const renderProducts = async products => {
+const renderProducts = products => {
   const productsEl = document.getElementById('products');
   productsEl.innerHTML='';
-  for(const p of products){
-    const card = await createCard(p);
-    productsEl.appendChild(card);
-  }
+  const frag = document.createDocumentFragment();
+  products.forEach(p=>frag.appendChild(createCard(p)));
+  productsEl.appendChild(frag);
 };
 
 fetch('products.json')
